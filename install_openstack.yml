@@ -1,0 +1,31 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: update repository index
+      apt:
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: install neutron on Ubuntu
+      apt:
+        name:
+          - neutron-server
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: install horizon on Ubuntu
+      apt:
+        name:
+          - openstack-dashboard
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: install cinder on Ubuntu
+      apt:
+        name:
+          - cinder-api
+        state: latest
+      when: ansible_distribution == "Ubuntu"
